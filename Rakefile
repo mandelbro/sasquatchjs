@@ -14,11 +14,11 @@ require 'rake'
 require 'jeweler'
 Jeweler::Tasks.new do |gem|
   # gem is a Gem::Specification... see http://docs.rubygems.org/read/chapter/20 for more options
-  gem.name = "sasquatchjs"
+  gem.name = "SasquatchJS"
   gem.homepage = "http://github.com/mandelbro/sasquatchjs"
   gem.license = "MIT"
-  gem.summary = %Q{TODO: one-line summary of your gem}
-  gem.description = %Q{TODO: longer description of your gem}
+  gem.summary = %Q{A SASS Watch Like tool for JavaScript}
+  gem.description = %Q{Gives you a SASS Watch type syntax for combining and minimizing javascript files}
   gem.email = "chrismontes@about.me"
   gem.authors = ["Chris Montes"]
   # dependencies defined in Gemfile
