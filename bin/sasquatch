@@ -1,0 +1,5 @@
+#!/usr/bin/env ruby
+
+require 'mandelbro_test_gem'
+
+tg = GemTest.new(ARGV)
