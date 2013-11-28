@@ -1,5 +1,5 @@
 #!/usr/bin/env ruby
 
-require 'mandelbro_test_gem'
+require 'sasquatchjs'
 
-tg = GemTest.new(ARGV)
+sasquatch = Sasquatch.watch(ARGV)

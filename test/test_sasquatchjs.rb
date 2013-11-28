@@ -1,7 +1,11 @@
-require 'helper'
 
-class TestSasquatchjs < Test::Unit::TestCase
-  should "probably rename this file and start testing for real" do
-    flunk "hey buddy, you should probably rename this file and start testing for real"
+describe Sasquatch do
+  context "#listening" do
+    Sasquatch.watch('js/application.js')
+    it "should print out the right thing" do
+      printer = Printer.new
+      fiction = FictionBook.new
+      printer.print(fiction).should eq "This book is Fiction!"
+    end
   end
 end
