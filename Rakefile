@@ -21,7 +21,7 @@ Jeweler::Tasks.new do |gem|
   gem.description = %Q{Gives you a SASS Watch type syntax for combining and minimizing javascript files}
   gem.email       = "chrismontes@about.me"
   gem.authors     = ["Chris Montes"]
-  gem.files       = 'git ls-files'.split($/)
+  gem.files       = `git ls-files`.split($/)
   gem.require_path= 'lib'
   gem.version     = '0.1.0'
   # dependencies defined in Gemfile
