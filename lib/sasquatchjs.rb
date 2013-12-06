@@ -9,6 +9,6 @@ module Sasquatch
   # @return [Sasquatch::Quatcher] the listener
   #
   def self.watch(*args, &block)
-    Quatcher.new(*args, &block)
+    Quatcher.new(*args)
   end
 end
