@@ -1,7 +1,7 @@
 require 'listen'
 require 'quatch/quatcher'
 
-class Sasquatch
+module Sasquatch
   # Sasquatch to file system modifications on a either single directory or multiple directories.
   #
   # @param (see Listen::Listener#new)
