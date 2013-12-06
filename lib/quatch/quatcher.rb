@@ -1,6 +1,6 @@
 # require all files in the directory
 # example:
-# require "quatcher"
+require "optparse"
 
 class Quatcher
 
