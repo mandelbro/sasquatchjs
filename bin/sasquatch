@@ -2,4 +2,12 @@
 
 require 'sasquatchjs'
 
-sasquatch = Sasquatch.watch(ARGV)
+begin
+  Sasquatch.watch(*ARGV)
+rescue Errno::ENOENT => err
+  $stderr.puts "Sasquatch: #{err.message}"
+  exit(1)
+rescue OptionParser::InvalidOption => err
+  $stderr.puts "Sasquatch: #{err.message}\nusage: sasquatch [-bns] [file ...]"
+  exit(1)
+end
