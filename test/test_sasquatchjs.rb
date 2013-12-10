@@ -43,12 +43,9 @@ describe Sasquatch do
   context "#Listener" do
     listener = Sasquatch::Listener.new('test/js/application.js')
     # it should have a list of all imported files
-      files = {
-        "test.js" => "/Users/chrismontes/Ruby/gems/sasquatchjs/test.js",
-        "test-2.js" => "/Users/chrismontes/Ruby/gems/sasquatchjs/test-2.js"
-      }
-      expect(sasquatch.files).to eq files
     it "should have a list of all imported files" do
+      files = ["test.js", "test-2.js"]
+      expect(listener.files.keys).to eq files
     end
     # it should start listening to a valid file
     it "should listen to changes to the initilized file" do
