@@ -16,17 +16,18 @@ module Sasquatch
 
       @listeners = []
 
+      @compiler = Compiler.new('.min.js')
+
       @options[:files].each do |file|
 
         @listeners << Listener.new(file, &file_changed)
 
       end
 
-      @compiler = Compiler.new('.min.js')
-
     end
 
     def file_changed
+
       Proc.new do |modified_file, file, files|
 
         @compiler.compile(files, file)
