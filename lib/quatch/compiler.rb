@@ -24,5 +24,16 @@ module Sasquatch
         file.write(output_buffer)
       end
     end
+
+    def output_filename file
+
+      filename = ""
+      file.scan(/^(.*?)\./) do |basename|
+        filename = basename.first + @ext
+      end
+
+      (filename == file ? filename + @ext : filename)
+
+    end
   end
 end
