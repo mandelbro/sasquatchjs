@@ -90,6 +90,8 @@ describe Sasquatch do
 
     end
 
+    sleep(1)
+    @thread.exit
   end
 
 end
