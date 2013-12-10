@@ -80,6 +80,16 @@ describe Sasquatch do
     end
     # it should write a new file when any of the import files are changed
     it "should add the imported files into the compiled file when a file is changed" do
+      File.write(f = File.path('test/js/test.js'), File.read(f).gsub(/\n.*line added by rspec|\n{1}\z/, "\n // #{Time.now} line added by rspec"))
+
+      sleep(1)
+
+      @import_file = File.read(File.path('test/js/test.js'))
+
+      expect(File.read(File.path('test/js/application.min.js')).index(@import_file)).to_not eq nil
+
+    end
+
   end
 
 end
