@@ -18,6 +18,7 @@ module Sasquatch
 
       end
 
+      @compiler = Compiler.new('.min.js')
 
     end
 
