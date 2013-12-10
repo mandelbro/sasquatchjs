@@ -21,8 +21,12 @@ module Sasquatch
 
     end
 
+    def file_changed
+      Proc.new do |modified_file, file, files|
 
+        @compiler.compile(files, file)
 
+        logger "Sasquatch has detected a change to #{modified_file}, recompiling..."
       end
     end
 
