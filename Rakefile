@@ -23,7 +23,7 @@ Jeweler::Tasks.new do |gem|
   gem.authors     = ["Chris Montes"]
   gem.files       = `git ls-files`.split($/)
   gem.require_path= 'lib'
-  gem.version     = '0.1.0'
+  gem.version     = '0.1.1'
   # dependencies defined in Gemfile
 end
 Jeweler::RubygemsDotOrgTasks.new
