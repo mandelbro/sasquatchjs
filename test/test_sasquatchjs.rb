@@ -47,6 +47,10 @@ describe Sasquatch do
       files = ["test.js", "test-2.js"]
       expect(listener.files.keys).to eq files
     end
+    sleep(1)
+    @thread = Thread.new { Sasquatch.watch('test/js/application.js') }
+    @thread.abort_on_exception = true
+    sleep(1)
     # it should start listening to a valid file
     it "should listen to changes to the initilized file" do
     # should listen to changes to the imported files
