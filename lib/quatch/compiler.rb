@@ -38,7 +38,8 @@ module Sasquatch
 
     # search the output buffer for the key and replace it with the import_file
     def import output_buffer, key, import_file
-      output_buffer.sub(/\/\* @import #{key} \*\//, "/* Imports #{key} */ \n\n" + File.read(import_file.path()) + "\n")
+
+      output_buffer.sub(/\/\* @import ["']#{key}["']; \*\//, "/* Imports #{key} */ \n\n" + File.read(import_file.path()) + "\n")
     end
 
   end
