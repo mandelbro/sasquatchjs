@@ -12,9 +12,14 @@ describe Sasquatch do
         @thread.exit
       }.to_not raise_exception
     end
-      expect { Sasquatch.watch('test/js/error') }.to raise_exception
     # it should raise an exception on an invalid file
     it "should raise an exception on an invalid file" do
+      expect {
+        @thread = Thread.new { Sasquatch.watch('test/js/error') }
+        @thread.abort_on_exception = true
+        sleep(1)
+        @thread.exit
+      }.to raise_exception
     end
       expect(Sasquatch.watch('test/js/application.js').status).to eq "Watching 'test/js/application.js' for updates"
     # it should raise an exception if any of the imported files are invalid
