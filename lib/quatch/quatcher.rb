@@ -1,5 +1,8 @@
 # require all files in the directory
 # example:
+require "quatch/logger"
+require "quatch/listener"
+require "quatch/compiler"
 require "optparse"
 
 module Sasquatch

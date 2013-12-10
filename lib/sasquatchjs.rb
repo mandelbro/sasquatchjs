@@ -1,4 +1,3 @@
-require 'listen'
 require 'quatch/quatcher'
 
 module Sasquatch
