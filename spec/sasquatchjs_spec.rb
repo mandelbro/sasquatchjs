@@ -42,9 +42,11 @@ describe "SasquatchJS" do
       sleep(1)
       @thread.exit
     end
+    STDOUT.flush
   end
 
   context "#Listener" do
+    STDOUT.flush
     listener = Sasquatch::Listener.new('spec/js/application.js', false)
     # it should have a list of all imported files
     it "should have a list of all imported files" do
