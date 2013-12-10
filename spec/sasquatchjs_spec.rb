@@ -8,6 +8,7 @@ describe "SasquatchJS" do
       expect {
         @thread = Thread.new { Sasquatch.watch('spec/js/application.js') }
         @thread.abort_on_exception = true
+        STDOUT.flush
         sleep(1)
         @thread.exit
       }.to_not raise_exception
@@ -17,6 +18,7 @@ describe "SasquatchJS" do
       expect {
         @thread = Thread.new { Sasquatch.watch('spec/js/error') }
         @thread.abort_on_exception = true
+        STDOUT.flush
         sleep(1)
         @thread.exit
       }.to raise_exception
@@ -26,16 +28,16 @@ describe "SasquatchJS" do
       expect {
         @thread = Thread.new { Sasquatch.watch('spec/js/import_error.js') }
         @thread.abort_on_exception = true
+        STDOUT.flush
         sleep(1)
         @thread.exit
       }.to raise_exception
     end
     # it should tell me what file is being watched
     it "should tell me what file is being watched" do
-      STDOUT.flush
-      sleep(2)
       @thread = Thread.new { Sasquatch.watch('spec/js/application.js') }
       STDOUT.should_receive(:puts).and_return("Watching 'spec/js/application.js' for updates")
+      STDOUT.flush
       @thread.abort_on_exception = true
       sleep(1)
       @thread.exit
@@ -43,7 +45,7 @@ describe "SasquatchJS" do
   end
 
   context "#Listener" do
-    sleep(1)
+    sleep(5)
     listener = Sasquatch::Listener.new('spec/js/application.js', false)
     # it should have a list of all imported files
     it "should have a list of all imported files" do
@@ -58,6 +60,7 @@ describe "SasquatchJS" do
       sleep(2)
       File.write(f = 'spec/js/application.js', File.read(f).gsub(/\n.*line added by rspec|\n{1}\z/, "\n // #{Time.now} line added by rspec"))
       STDOUT.should_receive(:puts).and_return("Sasquatch has detected a change to spec/js/application.js, recompiling...")
+      STDOUT.flush
       sleep(2)
     end
     # should listen to changes to the imported files
@@ -65,6 +68,7 @@ describe "SasquatchJS" do
       sleep(2)
       File.write(f = File.path('spec/js/test.js'), File.read(f).gsub(/\n.*line added by rspec|\n{1}\z/, "\n // #{Time.now} line added by rspec"))
       STDOUT.should_receive(:puts).and_return("Sasquatch has detected a change to spec/js/test.js, recompiling...")
+      STDOUT.flush
       sleep(2)
     end
     @thread.exit
