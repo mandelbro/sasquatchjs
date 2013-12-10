@@ -3,7 +3,6 @@ module Sasquatch
     def logger message
       @status = message
       print_line message
-      STDOUT.flush
     end
 
     def print_line(line)
