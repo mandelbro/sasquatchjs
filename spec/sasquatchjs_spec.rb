@@ -13,6 +13,7 @@ describe "SasquatchJS" do
         @thread.exit
       }.to_not raise_exception
     end
+    sleep(1)
     # it should raise an exception on an invalid file
     it "should raise an exception on an invalid file" do
       expect {
@@ -23,6 +24,7 @@ describe "SasquatchJS" do
         @thread.exit
       }.to raise_exception
     end
+    sleep(2)
     # it should raise an exception if any of the imported files are invalid
     it "should raise an exception if any of the imported files are invalid" do
       expect {
@@ -33,6 +35,7 @@ describe "SasquatchJS" do
         @thread.exit
       }.to raise_exception
     end
+    sleep(3)
     # it should tell me what file is being watched
     it "should tell me what file is being watched" do
       sleep(1)
@@ -52,7 +55,7 @@ describe "SasquatchJS" do
       files = ["test.js", "test-2.js"]
       expect(listener.files.keys).to eq files
     end
-    sleep(1)
+    sleep(5)
     @thread = Thread.new { Sasquatch.watch('spec/js/application.js') }
     @thread.abort_on_exception = true
     # it should start listening to a valid file
@@ -64,10 +67,10 @@ describe "SasquatchJS" do
     end
     # should listen to changes to the imported files
     it "should listen to changes to the imported files" do
-      sleep(1)
+      sleep(2)
       STDOUT.should_receive(:puts).and_return("Sasquatch has detected a change to spec/js/test.js, recompiling...")
       File.write(f = File.path('spec/js/test.js'), File.read(f).gsub(/\n.*line added by rspec|\n{1}\z/, "\n // #{Time.now} line added by rspec"))
-      sleep(1)
+      sleep(2)
     end
     @thread.exit
   end
@@ -75,7 +78,7 @@ describe "SasquatchJS" do
   context "#compiler" do
     @thread = Thread.new { Sasquatch.watch('spec/js/application.js') }
     @thread.abort_on_exception = true
-    sleep(1)
+    sleep(6)
     # it should write a new file when the primary file is changed
     it "should write a new file appended with .min.js when the primary file is changed" do
       File.write(f = File.path('spec/js/application.js'), File.read(f).gsub(/\n.*line added by rspec|\n{1}\z/, "\n // #{Time.now} line added by rspec"))
@@ -94,7 +97,7 @@ describe "SasquatchJS" do
 
     end
 
-    sleep(1)
+    sleep(2)
     @thread.exit
   end
 
