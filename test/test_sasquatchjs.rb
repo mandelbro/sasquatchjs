@@ -53,6 +53,10 @@ describe Sasquatch do
     sleep(1)
     # it should start listening to a valid file
     it "should listen to changes to the initilized file" do
+      File.write(f = 'test/js/application.js', File.read(f).gsub(/\n.*line added by rspec|\n{1}\z/, "\n // #{Time.now} line added by rspec"))
+      STDOUT.should_receive(:puts).and_return("Sasquatch has detected a change to test/js/application.js, recompiling...")
+      sleep(1)
+    end
     # should listen to changes to the imported files
     it "should listen to changes to the imported files" do
     end
