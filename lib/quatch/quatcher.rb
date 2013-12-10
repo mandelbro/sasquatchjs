@@ -13,16 +13,11 @@ module Sasquatch
       @options = parse_options args
 
 
-        find_imports(file)
 
-        # init the logger
-        logger "Watching '#{file}' for updates"
 
-        listen(File.dirname(file))
 
       end
 
-    end
 
     end
 
