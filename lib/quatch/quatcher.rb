@@ -8,10 +8,13 @@ require "optparse"
 module Sasquatch
   class Quatcher
     include Logger
+    attr_reader :options, :listeners, :compiler
+
     def initialize *args
 
       @options = parse_options args
 
+      @running = true;
 
       @listeners = []
 
