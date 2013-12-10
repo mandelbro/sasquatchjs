@@ -50,3 +50,5 @@ Gemfile.lock
 
 # For rubinius:
 #*.rbc
+
+test/js/application.min.js
