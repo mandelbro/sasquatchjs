@@ -5,7 +5,12 @@ describe Sasquatch do
   context "#initialization" do
     # it should accept a valid file
     it "should accept a valid file" do
-      expect { Sasquatch.watch('test/js/application.js') }.to_not raise_exception
+      expect {
+        @thread = Thread.new { Sasquatch.watch('test/js/application.js') }
+        @thread.abort_on_exception = true
+        sleep(1)
+        @thread.exit
+      }.to_not raise_exception
     end
       expect { Sasquatch.watch('test/js/error') }.to raise_exception
     # it should raise an exception on an invalid file
