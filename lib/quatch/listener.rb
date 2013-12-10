@@ -5,12 +5,12 @@ module Sasquatch
     include Logger
     attr_reader :file, :files, :listener, :status, :base_path, :file_changed, :running
 
-    def initialize file, &block
+    def initialize file, running = true, &block
       @file = file
 
       @base_path = File.dirname(@file)
 
-      @running = true
+      @running = running
 
       validate_file @file
 
