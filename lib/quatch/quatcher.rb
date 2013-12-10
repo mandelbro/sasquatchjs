@@ -13,8 +13,11 @@ module Sasquatch
       @options = parse_options args
 
 
+      @listeners = []
 
+      @options[:files].each do |file|
 
+        @listeners << Listener.new(file, &file_changed)
 
       end
 
