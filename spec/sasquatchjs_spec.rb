@@ -35,39 +35,40 @@ describe "SasquatchJS" do
     end
     # it should tell me what file is being watched
     it "should tell me what file is being watched" do
-      STDOUT.flush
-      sleep(1)
       @thread = Thread.new { Sasquatch.watch('spec/js/application.js') }
+      STDOUT.flush
       STDOUT.should_receive(:puts).and_return("Watching 'spec/js/application.js' for updates")
-      sleep(1)
       @thread.abort_on_exception = true
+      sleep(1)
       @thread.exit
     end
   end
 
   context "#Listener" do
+    sleep(5)
     listener = Sasquatch::Listener.new('spec/js/application.js', false)
     # it should have a list of all imported files
     it "should have a list of all imported files" do
       files = ["test.js", "test-2.js"]
       expect(listener.files.keys).to eq files
     end
+    sleep(1)
     @thread = Thread.new { Sasquatch.watch('spec/js/application.js') }
     @thread.abort_on_exception = true
-    sleep(5)
+    STDOUT.flush
     # it should start listening to a valid file
     it "should listen to changes to the initilized file" do
-      STDOUT.flush
       sleep(2)
       File.write(f = 'spec/js/application.js', File.read(f).gsub(/\n.*line added by rspec|\n{1}\z/, "\n // #{Time.now} line added by rspec"))
+      STDOUT.flush
       STDOUT.should_receive(:puts).and_return("Sasquatch has detected a change to spec/js/application.js, recompiling...")
       sleep(2)
     end
     # should listen to changes to the imported files
     it "should listen to changes to the imported files" do
-      STDOUT.flush
       sleep(2)
       File.write(f = File.path('spec/js/test.js'), File.read(f).gsub(/\n.*line added by rspec|\n{1}\z/, "\n // #{Time.now} line added by rspec"))
+      STDOUT.flush
       STDOUT.should_receive(:puts).and_return("Sasquatch has detected a change to spec/js/test.js, recompiling...")
       sleep(2)
     end
