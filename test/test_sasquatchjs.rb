@@ -41,7 +41,7 @@ describe Sasquatch do
   end
 
   context "#Listener" do
-    listener = Sasquatch::Listener.new('test/js/application.js')
+    listener = Sasquatch::Listener.new('test/js/application.js', false)
     # it should have a list of all imported files
     it "should have a list of all imported files" do
       files = ["test.js", "test-2.js"]
