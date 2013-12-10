@@ -42,11 +42,9 @@ describe "SasquatchJS" do
       sleep(1)
       @thread.exit
     end
-    STDOUT.flush
   end
 
   context "#Listener" do
-    STDOUT.flush
     listener = Sasquatch::Listener.new('spec/js/application.js', false)
     # it should have a list of all imported files
     it "should have a list of all imported files" do
@@ -55,7 +53,6 @@ describe "SasquatchJS" do
     end
     @thread = Thread.new { Sasquatch.watch('spec/js/application.js') }
     @thread.abort_on_exception = true
-    sleep(1)
     # it should start listening to a valid file
     it "should listen to changes to the initilized file" do
       STDOUT.should_receive(:puts).and_return("Sasquatch has detected a change to spec/js/application.js, recompiling...")
