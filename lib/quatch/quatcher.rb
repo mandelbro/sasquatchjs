@@ -9,6 +9,7 @@ module Sasquatch
   class Quatcher
     attr_accessor :files, :status, :options
     attr_reader :listener, :running
+    include Logger
     def initialize *args
 
       @options = parse_options args
@@ -87,18 +88,5 @@ module Sasquatch
       params
     end
 
-    def init_logger
-      # create the log file
-    end
-
-    def logger message
-      @status = message
-      print_line message
-      STDOUT.flush
-    end
-
-    def print_line(line)
-      print "\s\s#{line.to_s.rjust(6)}\n"
-    end
   end
 end
