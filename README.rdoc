@@ -2,6 +2,18 @@
 
 It's like SASS Watch for JavaScript
 
+== Usage
+
+Add imports to your javascript file like this:
+
++/* @import 'plugins.js' */+
+
+Watch the main from the command line:
+
++sasquatch path/to/js/file.js+
+
+Any time the main file, or any imported files change, the file will be compiled into file appended with .min.js file
+
 == Contributing to sasquatchjs
 
 * Check out the latest master to make sure the feature hasn't been implemented or the bug hasn't been fixed yet.
