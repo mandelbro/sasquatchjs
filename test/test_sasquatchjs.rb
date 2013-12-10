@@ -73,6 +73,11 @@ describe Sasquatch do
     sleep(1)
     # it should write a new file when the primary file is changed
     it "should write a new file appended with .min.js when the primary file is changed" do
+      File.write(f = File.path('test/js/application.js'), File.read(f).gsub(/\n.*line added by rspec|\n{1}\z/, "\n // #{Time.now} line added by rspec"))
+      sleep(1)
+      expect(File.file?('test/js/application.min.js')).to eq true
+      sleep(1)
+    end
     # it should write a new file when any of the import files are changed
     it "should add the imported files into the compiled file when a file is changed" do
   end
