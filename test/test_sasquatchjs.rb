@@ -68,6 +68,9 @@ describe Sasquatch do
   end
 
   context "#compiler" do
+    @thread = Thread.new { Sasquatch.watch('test/js/application.js') }
+    @thread.abort_on_exception = true
+    sleep(1)
     # it should write a new file when the primary file is changed
     it "should write a new file appended with .min.js when the primary file is changed" do
     # it should write a new file when any of the import files are changed
