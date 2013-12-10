@@ -29,7 +29,7 @@ module Sasquatch
 
     def find_imports file
       @files = {}
-      File.read(file).scan(/\/\* @import (.*.js)/) do |filename|
+      File.read(file).scan(/\/\* @import .+?(.*.js)/) do |filename|
         @import = "#{File.dirname(@file)}/#{filename.first}"
         validate_file @import
         @files[filename.first] = File.new(File.absolute_path(@import))
