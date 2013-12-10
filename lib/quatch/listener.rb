@@ -3,12 +3,14 @@ require 'listen' # require listen gem
 module Sasquatch
   class Listener
     include Logger
-    attr_reader :file, :files, :listener, :status, :base_path, :file_changed
+    attr_reader :file, :files, :listener, :status, :base_path, :file_changed, :running
 
     def initialize file, &block
       @file = file
 
       @base_path = File.dirname(@file)
+
+      @running = true
 
       validate_file @file
 

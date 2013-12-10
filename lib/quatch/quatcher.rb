@@ -14,8 +14,6 @@ module Sasquatch
 
       @options = parse_options args
 
-      @running = true;
-
       @listeners = []
 
       @options[:files].each do |file|
