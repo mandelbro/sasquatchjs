@@ -8,8 +8,8 @@ describe "SasquatchJS" do
       expect {
         @thread = Thread.new { Sasquatch.watch('spec/js/application.js') }
         @thread.abort_on_exception = true
-        sleep(1)
         STDOUT.flush
+        sleep(1)
         @thread.exit
       }.to_not raise_exception
     end
@@ -18,8 +18,8 @@ describe "SasquatchJS" do
       expect {
         @thread = Thread.new { Sasquatch.watch('spec/js/error') }
         @thread.abort_on_exception = true
-        sleep(1)
         STDOUT.flush
+        sleep(1)
         @thread.exit
       }.to raise_exception
     end
@@ -28,8 +28,8 @@ describe "SasquatchJS" do
       expect {
         @thread = Thread.new { Sasquatch.watch('spec/js/import_error.js') }
         @thread.abort_on_exception = true
-        sleep(1)
         STDOUT.flush
+        sleep(1)
         @thread.exit
       }.to raise_exception
     end
@@ -51,22 +51,20 @@ describe "SasquatchJS" do
       files = ["test.js", "test-2.js"]
       expect(listener.files.keys).to eq files
     end
-    sleep(1)
     @thread = Thread.new { Sasquatch.watch('spec/js/application.js') }
     @thread.abort_on_exception = true
     sleep(1)
     # it should start listening to a valid file
     it "should listen to changes to the initilized file" do
-      File.write(f = 'spec/js/application.js', File.read(f).gsub(/\n.*line added by rspec|\n{1}\z/, "\n // #{Time.now} line added by rspec"))
       STDOUT.should_receive(:puts).and_return("Sasquatch has detected a change to spec/js/application.js, recompiling...")
-      STDOUT.flush
+      File.write(f = 'spec/js/application.js', File.read(f).gsub(/\n.*line added by rspec|\n{1}\z/, "\n // #{Time.now} line added by rspec"))
       sleep(1)
     end
+    sleep(1)
     # should listen to changes to the imported files
     it "should listen to changes to the imported files" do
-      File.write(f = File.path('spec/js/test.js'), File.read(f).gsub(/\n.*line added by rspec|\n{1}\z/, "\n // #{Time.now} line added by rspec"))
       STDOUT.should_receive(:puts).and_return("Sasquatch has detected a change to spec/js/test.js, recompiling...")
-      STDOUT.flush
+      File.write(f = File.path('spec/js/test.js'), File.read(f).gsub(/\n.*line added by rspec|\n{1}\z/, "\n // #{Time.now} line added by rspec"))
       sleep(1)
     end
     sleep(1)
@@ -80,11 +78,9 @@ describe "SasquatchJS" do
     # it should write a new file when the primary file is changed
     it "should write a new file appended with .min.js when the primary file is changed" do
       File.write(f = File.path('spec/js/application.js'), File.read(f).gsub(/\n.*line added by rspec|\n{1}\z/, "\n // #{Time.now} line added by rspec"))
-      sleep(1)
       expect(File.file?('spec/js/application.min.js')).to eq true
-      STDOUT.flush
-      sleep(1)
     end
+    sleep(1)
     # it should write a new file when any of the import files are changed
     it "should add the imported files into the compiled file when a file is changed" do
       File.write(f = File.path('spec/js/test.js'), File.read(f).gsub(/\n.*line added by rspec|\n{1}\z/, "\n // #{Time.now} line added by rspec"))
@@ -94,7 +90,6 @@ describe "SasquatchJS" do
       @import_file = File.read(File.path('spec/js/test.js'))
 
       expect(File.read(File.path('spec/js/application.min.js')).index(@import_file)).to_not eq nil
-      STDOUT.flush
 
     end
 
