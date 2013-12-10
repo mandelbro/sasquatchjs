@@ -63,6 +63,8 @@ describe Sasquatch do
       STDOUT.should_receive(:puts).and_return("Sasquatch has detected a change to test/js/test.js, recompiling...")
       sleep(1)
     end
+    sleep(1)
+    @thread.exit
   end
 
   context "#compiler" do
